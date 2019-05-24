@@ -1,0 +1,97 @@
+package com.company;
+
+import java.util.Scanner;
+
+public class Main {
+
+    public static void main(String[] args) {
+
+        Scanner sc = new Scanner(System.in);
+        double res = 0;
+        String operacion;
+        boolean comprobar = false;
+
+        do{
+
+            String num1;
+            do {
+                System.out.println("\n Teclee el primer valor para su operacion: \n");
+                num1 = sc.nextLine();
+            } while (!num1.matches("[+-]?[\\d]*[.]?[\\d]+"));
+            double nume1 = Double.parseDouble(num1);
+            double n1 = new Double(num1);
+
+
+            do {
+
+                System.out.println("Sabiendo que: \n\n 1.Para realizar un suma, pulse + \n 2.Para realizar una resta, pulse - \n"
+                        + " 3.Para realizar una division, pulse / \n " +
+                        "4.Para realizar la multiplicacion, pulse X \n 5.Para realizar la raiz cuadrada, pulse R \n ¿Que desea realizar?: \n\n");
+                operacion = sc.nextLine();
+                if (operacion.equals("+") || operacion.equals("-") || operacion.equals("x") ||
+                        operacion.equals("X") || operacion.equals("/") || operacion.equals("R")) {
+                    comprobar = true;
+                }else { comprobar = false; }
+            } while (comprobar != true);
+
+            String num2 = "0";
+            double nume2 = Double.parseDouble(num2);
+            double n2 = new Double(num2);
+            if (operacion.equals("+") || operacion.equals("-") || operacion.equals("x") ||
+                    operacion.equals("X") || operacion.equals("/")) {
+
+
+                do {
+                    System.out.println("\n Teclee el siguiente numero:");
+                    num2 = sc.nextLine();
+                } while (!num2.matches("[+-]?[\\d]*[.]?[\\d]+"));
+                nume2 = Double.parseDouble(num2);
+                n2 = new Double(num2);
+            }
+
+            do{
+                comprobar = true;
+                switch(operacion){
+                    case "+":
+                        res = n1 + n2;
+                        break;
+                    case "-":
+                        res = n1 - n2;
+                        break;
+                    case "x":
+                    case "X":
+                        res = n1 * n2;
+                        break;
+                    case "/":
+
+                        while(n2 == 0){
+                            do {
+                                System.err.println("No se puede realizar la operacion si no coloca un valor para el denominador.\nTeclee un valor: \n");
+                                num2 = sc.nextLine();
+                            }while (!num2.matches("[+-]?[\\d]*[.]?[\\d]+"));
+                            nume2 = Double.parseDouble(num2);
+                            n2 = new Double(num2);
+                        }
+                        res = n1 / n2;
+                        break;
+                    case "R":
+                        res = Math.sqrt(n1);
+                        break;
+                }
+            }while(comprobar != true);
+
+            System.out.println("(" + num1 + ") " + operacion + " (" + num2 + ")" + " = " + res);
+
+            System.out.println(" Para realizar una nueva operacion, escriba la palabra: si \n Para cerrar el programa pulse cualquier tecla: \n" );
+            do{
+                comprobar = true;
+                operacion = sc.nextLine();
+
+
+            }while(comprobar != true);
+        }while(operacion.equals("si"));
+    }
+}
+
+
+
